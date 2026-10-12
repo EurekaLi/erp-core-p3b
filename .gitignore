@@ -1,0 +1,54 @@
+# 原始数据和中间产物体积较大，且可由公开数据源与配置重新生成。
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# 模型、数组和缓存文件不进入版本控制。
+*.fif
+*.edf
+*.bdf
+*.set
+*.fdt
+*.npy
+*.npz
+*.joblib
+*.pkl
+*.h5
+*.hdf5
+*.zarr/
+*.zip
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest-*-tmp/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.codex_tmp/
+
+# 本地环境和编辑器配置。
+.env
+.venv/
+.conda/
+.idea/
+.vscode/
+
+# 运行结果默认可重新生成；最终入选的图表可单独强制加入 Git。
+results/*
+!results/README.md
+!results/erp_analysis/
+results/erp_analysis/*
+!results/erp_analysis/analysis_manifest.json
+!results/erp_analysis/cluster_summary.csv
+!results/erp_analysis/group_statistics.csv
+!results/erp_analysis/results_summary.md
+!results/erp_analysis/sensitivity_analysis.csv
+reports/figures/*
+!reports/figures/.gitkeep
+!reports/figures/erp_analysis/
+!reports/figures/erp_analysis/*.png
+

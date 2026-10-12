@@ -1,0 +1,39 @@
+erp:
+  # 主要分析固定为 Pz 的 300--600 ms 平均幅值，避免依据显著性后验挑选窗口。
+  p3b_window_s: [0.3, 0.6]
+  channels: [Pz]
+  # 该 ROI 只用于次要的空间稳健性分析；数据中没有 POz 通道。
+  posterior_roi_channels: [CPz, Pz, PO3, PO4]
+  measurements:
+    - mean_amplitude
+    - peak_amplitude
+    - peak_latency
+    - area_under_curve
+
+time_frequency:
+  method: morlet
+  fmin_hz: 2.0
+  fmax_hz: 30.0
+  frequency_step_hz: 1.0
+  baseline_mode: logratio
+  bands:
+    delta: [2.0, 4.0]
+    theta: [4.0, 8.0]
+    alpha: [8.0, 13.0]
+    beta: [13.0, 30.0]
+
+wavelet:
+  family: db4
+  level: null
+  measurements:
+    - relative_energy
+    - wavelet_entropy
+    - coefficient_mean
+    - coefficient_std
+
+pca:
+  enabled: true
+  variance_retained: 0.95
+  # PCA 必须处于交叉验证 Pipeline 内，不能在完整数据集上预先拟合。
+  fit_scope: training_fold_only
+

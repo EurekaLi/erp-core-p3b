@@ -1,0 +1,353 @@
+{
+  "created_at_utc": "2026-10-11T17:45:39.757632+00:00",
+  "phase": 5,
+  "config_path": "configs/erp_analysis.yaml",
+  "config_sha256": "4e805d489775ce18aad149cf1470da106de7e65dc07bf88c605646467575759f",
+  "subject_count": 39,
+  "subjects": [
+    "sub-001",
+    "sub-002",
+    "sub-003",
+    "sub-004",
+    "sub-005",
+    "sub-006",
+    "sub-007",
+    "sub-008",
+    "sub-009",
+    "sub-010",
+    "sub-011",
+    "sub-012",
+    "sub-013",
+    "sub-014",
+    "sub-015",
+    "sub-016",
+    "sub-017",
+    "sub-018",
+    "sub-019",
+    "sub-020",
+    "sub-021",
+    "sub-022",
+    "sub-023",
+    "sub-024",
+    "sub-025",
+    "sub-026",
+    "sub-027",
+    "sub-028",
+    "sub-029",
+    "sub-031",
+    "sub-032",
+    "sub-033",
+    "sub-034",
+    "sub-035",
+    "sub-036",
+    "sub-037",
+    "sub-038",
+    "sub-039",
+    "sub-040"
+  ],
+  "input_files": [
+    {
+      "subject": "sub-001",
+      "file": "data/processed/epochs/adjudicated/sub-001_task-P3_epo.fif",
+      "target_trials": 35,
+      "standard_trials": 155,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-002",
+      "file": "data/processed/epochs/adjudicated/sub-002_task-P3_epo.fif",
+      "target_trials": 39,
+      "standard_trials": 158,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-003",
+      "file": "data/processed/epochs/adjudicated/sub-003_task-P3_epo.fif",
+      "target_trials": 33,
+      "standard_trials": 150,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-004",
+      "file": "data/processed/epochs/adjudicated/sub-004_task-P3_epo.fif",
+      "target_trials": 30,
+      "standard_trials": 159,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-005",
+      "file": "data/processed/epochs/adjudicated/sub-005_task-P3_epo.fif",
+      "target_trials": 36,
+      "standard_trials": 152,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-006",
+      "file": "data/processed/epochs/adjudicated/sub-006_task-P3_epo.fif",
+      "target_trials": 5,
+      "standard_trials": 129,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-007",
+      "file": "data/processed/epochs/adjudicated/sub-007_task-P3_epo.fif",
+      "target_trials": 34,
+      "standard_trials": 160,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-008",
+      "file": "data/processed/epochs/adjudicated/sub-008_task-P3_epo.fif",
+      "target_trials": 33,
+      "standard_trials": 127,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-009",
+      "file": "data/processed/epochs/adjudicated/sub-009_task-P3_epo.fif",
+      "target_trials": 32,
+      "standard_trials": 153,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-010",
+      "file": "data/processed/epochs/adjudicated/sub-010_task-P3_epo.fif",
+      "target_trials": 8,
+      "standard_trials": 143,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-011",
+      "file": "data/processed/epochs/adjudicated/sub-011_task-P3_epo.fif",
+      "target_trials": 39,
+      "standard_trials": 159,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-012",
+      "file": "data/processed/epochs/adjudicated/sub-012_task-P3_epo.fif",
+      "target_trials": 30,
+      "standard_trials": 157,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-013",
+      "file": "data/processed/epochs/adjudicated/sub-013_task-P3_epo.fif",
+      "target_trials": 30,
+      "standard_trials": 158,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-014",
+      "file": "data/processed/epochs/adjudicated/sub-014_task-P3_epo.fif",
+      "target_trials": 27,
+      "standard_trials": 127,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-015",
+      "file": "data/processed/epochs/adjudicated/sub-015_task-P3_epo.fif",
+      "target_trials": 38,
+      "standard_trials": 160,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-016",
+      "file": "data/processed/epochs/adjudicated/sub-016_task-P3_epo.fif",
+      "target_trials": 39,
+      "standard_trials": 160,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-017",
+      "file": "data/processed/epochs/adjudicated/sub-017_task-P3_epo.fif",
+      "target_trials": 40,
+      "standard_trials": 160,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-018",
+      "file": "data/processed/epochs/adjudicated/sub-018_task-P3_epo.fif",
+      "target_trials": 33,
+      "standard_trials": 158,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-019",
+      "file": "data/processed/epochs/adjudicated/sub-019_task-P3_epo.fif",
+      "target_trials": 39,
+      "standard_trials": 159,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-020",
+      "file": "data/processed/epochs/adjudicated/sub-020_task-P3_epo.fif",
+      "target_trials": 38,
+      "standard_trials": 158,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-021",
+      "file": "data/processed/epochs/adjudicated/sub-021_task-P3_epo.fif",
+      "target_trials": 35,
+      "standard_trials": 158,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-022",
+      "file": "data/processed/epochs/adjudicated/sub-022_task-P3_epo.fif",
+      "target_trials": 27,
+      "standard_trials": 154,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-023",
+      "file": "data/processed/epochs/adjudicated/sub-023_task-P3_epo.fif",
+      "target_trials": 37,
+      "standard_trials": 160,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-024",
+      "file": "data/processed/epochs/adjudicated/sub-024_task-P3_epo.fif",
+      "target_trials": 35,
+      "standard_trials": 158,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-025",
+      "file": "data/processed/epochs/adjudicated/sub-025_task-P3_epo.fif",
+      "target_trials": 33,
+      "standard_trials": 128,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-026",
+      "file": "data/processed/epochs/adjudicated/sub-026_task-P3_epo.fif",
+      "target_trials": 35,
+      "standard_trials": 139,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-027",
+      "file": "data/processed/epochs/adjudicated/sub-027_task-P3_epo.fif",
+      "target_trials": 27,
+      "standard_trials": 150,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-028",
+      "file": "data/processed/epochs/adjudicated/sub-028_task-P3_epo.fif",
+      "target_trials": 37,
+      "standard_trials": 155,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-029",
+      "file": "data/processed/epochs/adjudicated/sub-029_task-P3_epo.fif",
+      "target_trials": 35,
+      "standard_trials": 144,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-031",
+      "file": "data/processed/epochs/adjudicated/sub-031_task-P3_epo.fif",
+      "target_trials": 40,
+      "standard_trials": 157,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-032",
+      "file": "data/processed/epochs/adjudicated/sub-032_task-P3_epo.fif",
+      "target_trials": 35,
+      "standard_trials": 157,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-033",
+      "file": "data/processed/epochs/adjudicated/sub-033_task-P3_epo.fif",
+      "target_trials": 40,
+      "standard_trials": 157,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-034",
+      "file": "data/processed/epochs/adjudicated/sub-034_task-P3_epo.fif",
+      "target_trials": 36,
+      "standard_trials": 159,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-035",
+      "file": "data/processed/epochs/adjudicated/sub-035_task-P3_epo.fif",
+      "target_trials": 18,
+      "standard_trials": 144,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-036",
+      "file": "data/processed/epochs/adjudicated/sub-036_task-P3_epo.fif",
+      "target_trials": 38,
+      "standard_trials": 155,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-037",
+      "file": "data/processed/epochs/adjudicated/sub-037_task-P3_epo.fif",
+      "target_trials": 37,
+      "standard_trials": 153,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-038",
+      "file": "data/processed/epochs/adjudicated/sub-038_task-P3_epo.fif",
+      "target_trials": 33,
+      "standard_trials": 145,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-039",
+      "file": "data/processed/epochs/adjudicated/sub-039_task-P3_epo.fif",
+      "target_trials": 38,
+      "standard_trials": 160,
+      "sfreq_hz": 256.0
+    },
+    {
+      "subject": "sub-040",
+      "file": "data/processed/epochs/adjudicated/sub-040_task-P3_epo.fif",
+      "target_trials": 32,
+      "standard_trials": 146,
+      "sfreq_hz": 256.0
+    }
+  ],
+  "primary_analysis": {
+    "channel": "Pz",
+    "time_window_s": [
+      0.3,
+      0.6
+    ],
+    "measurement": "mean_amplitude_uv",
+    "statistical_test": "paired_t_test",
+    "alternative": "two-sided",
+    "alpha": 0.05,
+    "effect_size": "cohens_dz",
+    "confidence_level": 0.95,
+    "bootstrap_iterations": 5000,
+    "random_state": 42
+  },
+  "cluster_analysis": {
+    "enabled": true,
+    "cluster_count": 19,
+    "significant_cluster_count": 2,
+    "minimum_cluster_p_value": 0.0005,
+    "permutations": 2000,
+    "cluster_forming_threshold_t": 2.0243941639119694
+  },
+  "software": {
+    "python": "3.11.17",
+    "mne": "1.13.2",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scipy": "1.17.1"
+  }
+}

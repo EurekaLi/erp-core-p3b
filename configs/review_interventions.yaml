@@ -1,0 +1,18 @@
+bad_channels:
+  sub-009:
+    channels: [PO8, P10]
+    reason: "复核中97个超限epoch几乎均由PO8/P10触发；最严重PO8阶跃达到14888 µV。"
+  sub-035:
+    channels: [PO3]
+    reason: "原始QC确认的坏道。"
+  sub-039:
+    channels: [Oz]
+    reason: "原始QC确认的坏道。"
+
+# 成分同时满足EOG相关靠前且地形呈额部或左右眼动模式，编号只适用于当前固定种子分解。
+ica_exclusions:
+  sub-025: [0, 2]
+  sub-030: [0]
+  sub-039: [0, 7]
+
+excluded_subjects: {}

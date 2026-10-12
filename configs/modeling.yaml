@@ -1,0 +1,23 @@
+split:
+  strategy: group_k_fold
+  group_key: subject_id
+  n_splits: 5
+  random_state: 42
+
+metrics:
+  - balanced_accuracy
+  - roc_auc
+  - average_precision
+  - f1
+
+models:
+  - logistic_regression
+  - linear_discriminant_analysis
+  - support_vector_machine
+
+statistics:
+  alpha: 0.05
+  bootstrap_iterations: 2000
+  permutation_iterations: 2000
+  multiple_comparison: cluster_permutation
+

@@ -1,0 +1,72 @@
+dataset:
+  primary_epochs_root: data/processed/epochs/adjudicated
+  primary_subject_count: 39
+  excluded_from_primary: [sub-030]
+  unit_of_analysis: subject
+
+conditions:
+  target: Target
+  standard: Standard
+  contrast: Target-minus-Standard
+
+primary_analysis:
+  channel: Pz
+  time_window_s: [0.3, 0.6]
+  measurement: mean_amplitude_uv
+  statistical_test: paired_t_test
+  alternative: two-sided
+  alpha: 0.05
+  effect_size: cohens_dz
+  confidence_level: 0.95
+  bootstrap_iterations: 5000
+  random_state: 42
+
+secondary_analysis:
+  channel: Pz
+  time_window_s: [0.3, 0.6]
+  measurements:
+    - peak_amplitude_uv
+    - peak_latency_s
+    - signed_area_uv_s
+  # ROI 结果用于检查效应是否局限于单个电极，不替代预先定义的 Pz 主分析。
+  posterior_roi_channels: [CPz, Pz, PO3, PO4]
+  nonparametric_sensitivity_test: wilcoxon_signed_rank
+
+exploratory_analysis:
+  topography_window_s: [0.3, 0.6]
+  cluster_permutation:
+    enabled: true
+    time_window_s: [0.0, 0.8]
+    channel_type: eeg
+    cluster_forming_alpha: 0.05
+    permutations: 2000
+    random_state: 42
+
+sensitivity_analysis:
+  # 主结果固定为裁决后的 39 人；以下数据集只检查人工 QC 决策是否改变结论。
+  primary_39:
+    epochs_root: data/processed/epochs/adjudicated
+    excluded_subjects: [sub-030]
+  conservative_38:
+    epochs_root: data/processed/epochs/adjudicated
+    additionally_excluded_subjects: [sub-025]
+  inclusive_40:
+    base_epochs_root: data/processed/epochs/adjudicated
+    added_epoch_file: data/processed/epochs/reviewed/sub-030_task-P3_epo.fif
+  # 该检查由受试者测量表中的低Target计数触发，属于事后敏感性分析，不改写主结果。
+  posthoc_low_trial_check:
+    minimum_target_trials: 20
+
+outputs:
+  results_root: results/erp_analysis
+  figures_root: reports/figures/erp_analysis
+  subject_measurements: results/erp_analysis/subject_measurements.csv
+  group_statistics: results/erp_analysis/group_statistics.csv
+  sensitivity_results: results/erp_analysis/sensitivity_analysis.csv
+  analysis_manifest: results/erp_analysis/analysis_manifest.json
+  group_waveforms: results/erp_analysis/group_waveforms.csv
+  group_topographies: results/erp_analysis/group_topographies.csv
+  cluster_results: results/erp_analysis/cluster_permutation_results.npz
+  cluster_summary: results/erp_analysis/cluster_summary.csv
+  results_summary: results/erp_analysis/results_summary.md
+

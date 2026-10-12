@@ -1,0 +1,29 @@
+name: erp-core-p3b
+channels:
+  - conda-forge
+dependencies:
+  # Python 3.11 在 MNE、科学计算和 Jupyter 生态中兼容性稳定；不复用系统的 3.13 环境。
+  - python=3.11
+  - pip
+  - mne
+  - mne-bids
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - pywavelets
+  - statsmodels
+  - jupyterlab
+  - ipykernel
+  - pyyaml
+  - joblib
+  - tqdm
+  - pytest
+  - pytest-cov
+  - ruff
+  - pip:
+      # NEMAR 下载器用于按数据集、任务或受试者进行可恢复下载。
+      - nemar-py
+

@@ -1,0 +1,44 @@
+dataset:
+  id: nm000132
+  task: P3
+  raw_root: data/raw/erp-core-p3
+  interim_root: data/interim
+  processed_root: data/processed
+
+signal:
+  # 原始采样率为 1024 Hz；降至 256 Hz 后仍足以分析 30 Hz 以下 ERP/时频活动。
+  target_sfreq_hz: 256
+  line_frequency_hz: 60
+  analysis_highpass_hz: 0.1
+  analysis_lowpass_hz: 30.0
+  ica_highpass_hz: 1.0
+  ica_lowpass_hz: 40.0
+  reference: average
+
+epochs:
+  tmin_s: -0.2
+  tmax_s: 0.8
+  baseline_s: [-0.2, 0.0]
+  target_label: Target
+  standard_label: Standard
+  require_correct_response: true
+  exclude_behavior_flags: true
+
+quality_control:
+  # 三人pilot的95%分位数为183.1 µV；200 µV剔除4.1%的明显长尾epoch。
+  epoch_threshold_frozen: true
+  peak_to_peak_reject_uv: 200.0
+  max_bad_channel_fraction: 0.2
+  subject_review_max_epoch_rejection_fraction: 0.20
+  subject_review_min_ica_components: 10
+
+ica:
+  method: fastica
+  n_components_variance: 0.99
+  random_state: 42
+  max_iter: 3000
+  fit_decim: 2
+  # 0.50曾误选一个非典型眼动地形成分；0.70作为保守自动删除阈值。
+  eog_correlation_threshold: 0.70
+  max_eog_components: 3
+

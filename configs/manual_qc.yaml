@@ -1,0 +1,19 @@
+bad_channels:
+  sub-009:
+    channels: [PO8, P10]
+    reason: "四人复核显示97个超限epoch几乎均由PO8/P10触发；插值后二次试算无epoch超限。"
+  sub-035:
+    channels: [PO3]
+    reason: "原始QC同时出现方差离群和低相关，连续波形人工复核后确认为插值通道。"
+  sub-039:
+    channels: [Oz]
+    reason: "原始QC同时出现方差离群和低相关，连续波形人工复核后确认为插值通道。"
+
+# 低于自动阈值但经EOG相关、头皮地形和修正后试算共同确认的眼电成分。
+ica_exclusions:
+  sub-025: [0, 2]
+  sub-039: [0, 7]
+
+# sub-030在去除明确眨眼成分后仍有30.7%弥散异常，主分析排除并保留敏感性分析记录。
+excluded_subjects:
+  sub-030: "复核后仍有30.7% epoch超限；10/10时间箱均有异常，且55.9%坏epoch涉及至少3个通道。"

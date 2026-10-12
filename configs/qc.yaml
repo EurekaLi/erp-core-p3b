@@ -1,0 +1,22 @@
+behavior:
+  min_reaction_time_s: 0.15
+  max_response_window_s: 1.60
+
+signal:
+  psd_fmin_hz: 0.1
+  psd_fmax_hz: 100.0
+  welch_window_s: 4.0
+  welch_overlap_fraction: 0.5
+  correlation_target_sfreq_hz: 64.0
+  trace_window_s: 10.0
+  flat_diff_uv: 0.01
+
+thresholds:
+  # 这些阈值由40人发现性QC冻结；修改时必须重新生成并复核全体报告。
+  frozen: true
+  flat_duration_s: 1.0
+  robust_z_abs: 5.0
+  median_abs_correlation_min: 0.20
+  candidate_min_statistical_flags: 2
+  max_bad_channel_fraction: 0.20
+
