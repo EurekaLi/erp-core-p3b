@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "snapshot": "final_report_v1",
+  "data": {
+    "name": "ERP CORE P3",
+    "dataset_doi": "10.82901/nemar.nm000132",
+    "locally_recorded_bids_dataset_version": "1.1.1",
+    "locally_recorded_license": "CC-BY-4.0",
+    "raw_subjects": 40,
+    "analysis_subjects": 39,
+    "excluded_subjects": ["sub-030"],
+    "trials": 7207,
+    "target_trials": 1286,
+    "standard_trials": 5921,
+    "labels": {"Standard": 0, "Target": 1},
+    "dataset_hash": "478c2e0f589eaa12f6b6c2f05bec550dc5efff243d065eaaad0cb1ea080f8658"
+  },
+  "evaluation": {
+    "outer_folds": 5,
+    "split_seed": 42,
+    "split_hash": "d44a8906b098f83fbfee239c81dcc554b41e89c84a9c36ed8a0394b840b36826",
+    "threshold": 0.5,
+    "main_aggregation": "equal_subject_macro",
+    "bootstrap_iterations": 2000,
+    "confidence_level": 0.95,
+    "bootstrap_seed": 42,
+    "bootstrap_scope": "conditional_on_fixed_splits_and_fitted_models",
+    "paired_comparisons": "descriptive_no_multiplicity_adjustment",
+    "oof_predictions_verified": 43242,
+    "training_seed_settings": 1,
+    "scenario": "offline_per_subject_unsupervised_preprocessing_with_grouped_evaluation"
+  },
+  "models": ["lr_erp", "lr_erp_power", "lr_all", "eegnet", "cbramod_linear", "cbramod_finetune"],
+  "cbramod_resources": {
+    "source_url": "https://github.com/wjq-learning/CBraMod",
+    "source_commit": "b9e961003214326972c567eff390e75b0287e32a",
+    "weight_url": "https://huggingface.co/weighting666/CBraMod",
+    "weight_revision": "500543c7e30bda1b22bfd51a49301b238dee21fd",
+    "weight_sha256": "0792cb808c14e6b7a2bb2ce1dff379bc47bc54c49a779825bdfeb33bf8157178",
+    "source_license_record": "MIT",
+    "weight_hub_license_record": "Apache-2.0",
+    "input_protocol_hash": "90846bf59365d1080ae3af6dbb7d3750bd02c3cb5ff3ffa422f7ab7001b41db2",
+    "input_shape_per_trial": [30, 1, 200],
+    "single_patch_limitation": true,
+    "upstream_resources_redistributed": false
+  },
+  "source_runs": {
+    "classification": {
+      "path": "data/processed/classification/v1",
+      "summary_sha256": "f6b8971c3f17fb6c69a1d7e5fb4199830e1bb602d7ce69aeab0c67ffec691db1"
+    },
+    "deep_learning": {
+      "path": "results/deep_learning/three-models-full-v1",
+      "summary_sha256": "bf651207519f893808aad423570fc754c3861820bad89f4359333c02678a8fec"
+    },
+    "logistic_regression": {
+      "path": "results/traditional_lr/lr-full",
+      "summary_sha256": "49c491d2251fd0b8d965133af239a0b7380e77d8acd1cca3c1be90278f6cc743"
+    },
+    "final_report": {
+      "path": "results/final_report/v1",
+      "summary_hash_recorded_in": "reports/release/artifact_manifest.json"
+    }
+  },
+  "results_origin": "scripts/14_build_final_report.py using existing full OOF predictions",
+  "retrained_for_showcase": false,
+  "raw_data_and_full_predictions_included": false,
+  "project_source_license_note": "上游许可来源分别记录，不作为本项目自有源码的统一许可证声明。"
+}

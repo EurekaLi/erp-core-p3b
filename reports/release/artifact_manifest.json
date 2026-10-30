@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "origin": "results/final_report/v1",
+  "source_final_report_summary_sha256": "2acf8c0dcdf00d8337be2ed20b815041454b5872e6371af62a8153d244057fe3",
+  "copy_method": "byte_identical_selected_aggregate_tables_and_figures",
+  "artifacts": [
+    {
+      "source": "results/final_report/v1/model_overview.csv",
+      "path": "reports/release/tables/model_overview.csv",
+      "sha256": "5a311d84a32e9ccb591bf85778accfeb00de7444bde8437382c8e9f88be55079",
+      "bytes": 1322
+    },
+    {
+      "source": "results/final_report/v1/subject_macro_ci.csv",
+      "path": "reports/release/tables/subject_macro_ci.csv",
+      "sha256": "e4f062d329c3a0c988a26c27e1d411386589c1c8d00d7692b2beb512706bfdaf",
+      "bytes": 4168
+    },
+    {
+      "source": "results/final_report/v1/paired_comparisons.csv",
+      "path": "reports/release/tables/paired_comparisons.csv",
+      "sha256": "beaf0730c9fb1aa6b0e3adf378837f322cc4aa217663980d89972f9ea2005f91",
+      "bytes": 8853
+    },
+    {
+      "source": "results/final_report/v1/pooled_metrics.csv",
+      "path": "reports/release/tables/pooled_metrics.csv",
+      "sha256": "ca8253ddd63b38014e767d71f7130a68d59911410d38e3c06a83be7de417080c",
+      "bytes": 1356
+    },
+    {
+      "source": "results/final_report/v1/compute_summary.csv",
+      "path": "reports/release/tables/compute_summary.csv",
+      "sha256": "670c117e0546d3e117313bf1aab927a043159ea7f8387d93f4442b5099f73d92",
+      "bytes": 328
+    },
+    {
+      "source": "results/final_report/v1/figures/model_comparison.png",
+      "path": "reports/figures/final_report/model_comparison.png",
+      "sha256": "cbb47c95a6448e09de3f26d109d6a161a448af6a9eafa200642bca2e2a18fd53",
+      "bytes": 93999
+    },
+    {
+      "source": "results/final_report/v1/figures/paired_ba_differences.png",
+      "path": "reports/figures/final_report/paired_ba_differences.png",
+      "sha256": "092cc9c653ec8e68faac4e83553bfc8ff2802c559f8d94bfbd3bfb461f49dcda",
+      "bytes": 61707
+    },
+    {
+      "source": "results/final_report/v1/figures/confusion_matrices.png",
+      "path": "reports/figures/final_report/confusion_matrices.png",
+      "sha256": "195e1eb097c6609b4a86106fd50ed38ffebc8e009130610b790d0829c03c1790",
+      "bytes": 116475
+    }
+  ]
+}

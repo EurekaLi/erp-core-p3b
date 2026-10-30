@@ -1,0 +1,31 @@
+dataset:
+  raw_root: data/raw/erp-core-p3
+  erp_epochs_root: data/processed/epochs/adjudicated
+  preprocessing_summary: results/preprocessing/adjudicated/subject_preprocessing.csv
+  preprocessing_run: results/preprocessing/adjudicated/run_summary.json
+  expected_subject_count: 39
+  expected_trial_count: 7207
+  pilot_subjects: [sub-001, sub-006, sub-025]
+  excluded_subjects: [sub-030]
+
+signal:
+  highpass_hz: 0.1
+  lowpass_hz: 40.0
+  # 应用ICA之前先按拟合时的坏道名单做平均参考，插值后再计算完整EEG平均参考。
+  reference_order: average_good_channels_ica_interpolate_average_all
+
+quality_control:
+  # 复用200 µV只作复核提示，不对更长窗口直接实施原ERP窗的自动剔除规则。
+  review_peak_to_peak_uv: 200.0
+  erp_reproduction_max_abs_error_uv: 0.001
+  # 保护时段出现复核提示时暂停全体运行，先看图再决定，不自动改变trial名单。
+  require_no_protected_review_flags_for_full_run: true
+
+resources:
+  rss_sampling_interval_s: 0.02
+  thread_limit: 1
+
+outputs:
+  epochs_root: data/processed/epochs/tfr_long
+  results_root: results/tfr_epochs
+  figures_root: reports/figures/tfr_epochs

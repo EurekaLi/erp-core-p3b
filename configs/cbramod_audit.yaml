@@ -1,0 +1,44 @@
+dataset:
+  epochs_root: data/processed/epochs/adjudicated
+  phase5_manifest: results/erp_analysis/analysis_manifest.json
+  expected_subject_count: 39
+  expected_trial_count: 7207
+  expected_target_count: 1286
+  expected_standard_count: 5921
+  pilot_subjects: [sub-001, sub-006, sub-025]
+  excluded_subjects: [sub-030]
+  expected_eeg_channels: 30
+  expected_eog_channels: 3
+  expected_sfreq_hz: 256.0
+  expected_time_points: 257
+  expected_highpass_hz: 0.1
+  expected_lowpass_hz: 30.0
+  expected_baseline_s: [-0.2, 0.0]
+
+adaptation:
+  target_sfreq_hz: 200.0
+  # 候选网格，不是正式实验冻结：原窗起点-51/256晚于-0.2，不能伪造更早数据。
+  start_time_s: -0.195
+  points_per_patch: 200
+  model_scale_v: 0.0001
+  resample_padtype: reflect
+  kaiser_beta: 5.0
+  plot_channel: Pz
+  review_peak_to_peak_uv: 200.0
+  # 仅验证数值精度；不是依据模型效果制定的坏trial阈值。
+  float32_max_error_uv: 0.001
+  mean_reference_tolerance_uv: 0.01
+
+model:
+  source_root: third_party/CBraMod
+  checkpoint: models/pretrained/CBraMod/pretrained_weights.pth
+  source_commit: b9e961003214326972c567eff390e75b0287e32a
+  checkpoint_sha256: 0792cb808c14e6b7a2bb2ce1dff379bc47bc54c49a779825bdfeb33bf8157178
+  # 模型资源与下载元数据一并记录；不自动升级作者代码或权重。
+  weight_revision: 500543c7e30bda1b22bfd51a49301b238dee21fd
+  probe_batch_size: 4
+  random_state: 2026
+  probe_learning_rate: 0.0001
+
+outputs:
+  results_root: results/cbramod_audit

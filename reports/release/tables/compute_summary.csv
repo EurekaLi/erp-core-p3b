@@ -1,0 +1,4 @@
+experiment,fits,total_fit_seconds,best_epoch_min,best_epoch_max,trainable_parameters,peak_cuda_mib,model
+cbramod_finetune,5,2252.3259491999997,5,24,4895602,219.77001953125,CBraMod finetune
+cbramod_linear,5,855.4546816999991,4,10,12002,87.9501953125,CBraMod linear
+eegnet,5,128.7505198000017,7,30,2354,116.09033203125,EEGNet

@@ -1,0 +1,38 @@
+{
+  "record_type": "observed_dl_environment_not_complete_dependency_lock",
+  "record_date": "2026-10-14",
+  "platform": "Windows",
+  "python": "3.11.17",
+  "packages": {
+    "torch": "2.12.1+cu130",
+    "mne": "1.13.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "PyWavelets": "1.9.0",
+    "matplotlib": "3.11.2",
+    "PyYAML": "6.0.3",
+    "joblib": "1.6.0",
+    "threadpoolctl": "3.7.0",
+    "pytest": "9.1.1",
+    "ruff": "0.17.0"
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "torch_cuda_runtime": "13.0"
+  },
+  "training": {
+    "deterministic": true,
+    "amp": false,
+    "num_workers": 0,
+    "base_seed": 2026,
+    "fold_seeds": [2027, 2028, 2029, 2030, 2031]
+  },
+  "signal_processing_environment_spec": "environment.yml",
+  "environment_notes": [
+    "版本来自已使用的DL环境和正式训练摘要，不是全部传递依赖的锁文件。",
+    "PyTorch运行时版本与系统CUDA开发工具包分别管理，本项目无需卸载现有CUDA。",
+    "原始信号处理环境与DL环境的用途及执行要求见docs/13–14。"
+  ]
+}

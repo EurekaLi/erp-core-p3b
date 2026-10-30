@@ -12,20 +12,21 @@ Phase 5 已经证明 Target 相比 Standard 存在稳定的 P3b 时域效应。P
 
 ## 2. 为什么不能直接对现有epochs运行2 Hz Morlet
 
-当前ERP epochs约为-0.2--0.8 s，总长度约1 s。2 Hz信号的一个周期为0.5 s；如果Morlet使用3个周期，一个小波本身就约1.5 s，比整个epoch更长。此外，当前刺激前只有约200 ms，无法为2--4 Hz功率提供稳定的基线估计。
+当前ERP epochs约为-0.2--0.8 s，总长度约1 s。2 Hz信号的一个周期为0.5 s；3周期的`n_cycles/f=1.5 s`只是周期尺度，不能当作MNE完整小波核长度。本机MNE实际生成的2 Hz、3周期核有611个点，首末点跨度为2.3828 s。完整核支持、有效平滑宽度和频率分辨率不是同一个概念。见[MNE Morlet文档](https://mne.tools/stable/generated/mne.time_frequency.morlet.html)。
 
-若直接运行，程序仍可能返回数值，但低频结果会受到严重边缘效应和零填充影响，看起来平滑却不可信。因此Phase 6的第一项工作不是立即画时频图，而是从连续数据复用Phase 4的坏道、ICA和重参考决定，构造专用的长时间窗TFR epochs。
+直接把长度不足的epochs交给MNE可能报“小波长于信号”的错误；人为补零或另选参数即使得到数值，也不补回缺失的真实信号。因此需要从连续数据复用Phase 4的坏道、ICA和重参考决定，构造专用长TFR epochs。加长只能解决截断，不能解决相邻刺激进入低频计算支持的问题。
 
-建议的TFR分支为：
+Phase 6.1已完成；以下参数根据39人审计冻结，不再沿用最初的候选基线。完整证据见[09_tfr_epoch_audit.md](09_tfr_epoch_audit.md)。TFR分支为：
 
 - 滤波：0.1--40 Hz；
 - 采样率：256 Hz；
-- epoch：暂定-1.5--2.0 s；
-- baseline：暂定-0.8---0.2 s；
+- epoch：-2.1--2.1 s，包含真实信号，不是补零；
+- 电压baseline：不减；功率baseline：-0.6---0.4 s；
+- 主分析：6--30 Hz；2--5 Hz只作无此基线归一化的探索性功率，不进入主分类特征；
 - 正式展示范围：-0.2--0.8 s；
 - 不在长epoch上再次拟合ICA，复用Phase 4已经冻结的ICA模型和排除成分。
 
-“暂定”表示必须先检查相邻事件间隔、记录边界和可用epoch数量。若大量trial无法获得完整的-1.5--2.0 s数据，应根据审计结果统一缩短边界，而不能逐受试者使用不同时间窗。
+冻结依据是事件间隔、卷积支持和资源成本，不是条件显著性。7207个trial的长窗几何可用率为100%；扩展时段信号质量仍须在重建时检查。不能逐受试者使用不同时间窗。
 
 ## 3. Phase 6的七个子阶段
 
@@ -35,13 +36,18 @@ Phase 5 已经证明 Target 相比 Standard 存在稳定的 P3b 时域效应。P
 
 - 每个刺激距记录开头和结尾的时间；
 - 相邻刺激间隔的分布；
-- 使用-1.5--2.0 s时可保留多少Target和Standard trial；
-- 长epoch预计磁盘空间和单受试者峰值内存；
+- 不同候选epoch与baseline可保留多少Target和Standard trial；
+- 完整Morlet核是否位于epoch内、基线是否使用当前刺激后数据；
+- 长epoch数组载荷和单受试者内存模型，不把模型值当作实测峰值；
 - Phase 4裁决版trial能否通过原始事件索引重新对应到连续数据。
 
-这一环节的输出应是审计CSV和分布图，不生成正式TFR结果。验收标准是为所有受试者冻结统一的长epoch边界和基线。
+本环节已输出7张CSV、审计摘要与复现清单JSON、两张审计图，并完成统一参数冻结；未生成正式TFR结果。
 
 ### 6.2 构造TFR专用信号分支
+
+三人pilot已实施，485个trial全部保持身份，ICA兼容性、同参数ERP复现和小批数值检查通过。
+保护支持中有59个复核候选；技术检查通过不等于伪迹复核通过，全体39人暂未放行。
+详细结果见[10_tfr_long_epochs_pilot.md](10_tfr_long_epochs_pilot.md)。
 
 复用Phase 4参数执行：坏道登记、滤波、降采样、已冻结ICA排除、坏道插值和平均参考。随后依据Phase 4保留的trial审计记录构造长epochs。
 
@@ -49,26 +55,28 @@ Phase 5 已经证明 Target 相比 Standard 存在稳定的 P3b 时域效应。P
 
 需要验证：
 
-- 新分支与ERP分支在重叠的-0.2--0.8 s区间波形一致；
+- 以同样滤波和电压baseline的复现检查验证与ERP分支的重叠波形；正式TFR分支使用0.1--40 Hz且不减电压baseline，不能要求它与0.1--30 Hz ERP分支逐点相同；
 - Target/Standard trial身份没有改变；
 - 不会把Phase 4已经剔除的trial重新加入；
 - 长epoch的边缘没有被误当作生理信号。
 
 ### 6.3 Morlet时频与ITC
 
-第一版建议使用2--30 Hz、1 Hz步长的Morlet频率网格。周期数不应对所有频率使用同一个常数，可采用随频率增加的规则，例如：
+主分析使用6--30 Hz、1 Hz步长；2--5 Hz探索分支不使用主分析的dB基线。周期数按已冻结的规则：
 
 ```text
 n_cycles(f) = clip(f / 2, 3, 10)
 ```
 
-这表示低频至少使用3个周期以保持基本频率分辨率，高频最多10个周期以避免时间分辨率过差。正式规则必须写入YAML并在结果中记录。
+低频周期下限为3，高频周期上限为10。该规则已写入YAML；核实际跨度仍需以MNE实现为准。对6--20 Hz，周期数与频率成比例，所以时间平滑宽度基本相同，不是频率越高就一定越短。
 
 每个条件需要区分：
 
 - 总功率：单trial功率后再平均，包含相位锁定和非相位锁定活动；
 - ITC：不同trial在某一时间—频率点的相位一致性；
 - 条件差：Target - Standard。
+
+Target与Standard的trial数明显不同，原始ITC估计具有trial数相关偏差。正式比较应使用等trial数重复抽样或适当的相位一致性指标（例如PPC），记录随机种子；不能直接把不平衡条件的ITC差解释成生理效应。
 
 第一版不必同时开展复杂的“诱发功率减去evoked”分析。可以先完成总功率和ITC，待其结果和实现稳定后再把诱导功率列为探索性扩展。
 
@@ -86,18 +94,19 @@ dB比没有单位说明的“logratio”更容易解释。ITC范围为0--1，不
 
 - Pz的Target、Standard和条件差时频图；
 - 后部ROI的条件差时频图；
-- delta、theta、alpha、beta频带时间曲线；
+- 主分析的高theta、alpha、beta频带时间曲线；低频探索单独标注；
 - 预先定义时间—频带窗口的头皮图；
 - 个体条件差热图。
 
 建议的频带仅作为汇总标签：
 
-- delta：2--4 Hz；
-- theta：4--8 Hz；
+- 高theta：6--8 Hz（不是完整4--8 Hz theta）；
 - alpha：8--13 Hz；
 - beta：13--30 Hz。
 
 频带边界在配置中只保存一份。边界频点属于哪个频带必须采用一致规则，避免4 Hz或8 Hz被重复计算。
+
+当前主分析按左闭右开、最后一带包含上界：6/7 Hz属于高theta，8--12 Hz属于alpha，13--30 Hz属于beta。2--5 Hz探索性原始功率不混入这些dB曲线。
 
 若进行时间—频率—空间cluster permutation，应明确标记为探索性，并控制数据维度。优先在后部ROI或预设频带上检验，不直接对所有时间、频率和通道构造难以解释的超大搜索空间。
 
@@ -171,11 +180,12 @@ Phase 6只生成未经全数据PCA的原始特征表。PCA、标准化、方差�
 
 1. `scripts/06_audit_tfr_epochs.py`：审计长epoch边界和事件间隔；
 2. 冻结`configs/features.yaml`中的TFR epoch、baseline、频率和周期规则；
-3. `scripts/07_run_time_frequency.py`：逐人计算Morlet、ITC和群体图；
-4. `scripts/08_extract_trial_features.py`：生成ERP、频带功率和DWT特征；
-5. 生成`feature_dictionary.csv`和特征QC报告；
-6. 添加数值、维度、单位、trial对齐和防泄漏测试；
-7. 汇总Phase 6结果和限制，再进入Phase 7。
+3. `scripts/07_build_tfr_epochs.py`：长窗重建与三人pilot门控，已实施；
+4. 确认长窗QC规则后，`scripts/08_run_time_frequency.py`逐人计算Morlet、ITC和群体图（待实施）；
+5. `scripts/09_extract_trial_features.py`生成ERP、频带功率和DWT特征（待实施）；
+6. 生成`feature_dictionary.csv`和特征QC报告；
+7. 添加数值、维度、单位、trial对齐和防泄漏测试；
+8. 汇总Phase 6结果和限制，再进入Phase 7。
 
 编号从06开始，是因为Phase 5的正式入口已经是`05_run_erp_analysis.py`。
 
@@ -193,8 +203,8 @@ Phase 6只生成未经全数据PCA的原始特征表。PCA、标准化、方差�
 
 ## 6. Phase 6验收标准
 
-- [ ] 长epoch边界、基线和事件间隔审计完成；
-- [ ] 统一的TFR参数在查看条件显著性前冻结；
+- [x] 长epoch边界、基线和事件间隔审计完成；
+- [x] 统一的TFR参数在查看条件显著性前冻结；
 - [ ] 39人逐人计算，不一次加载完整数据；
 - [ ] 输出Target、Standard、条件差和ITC图；
 - [ ] 输出ERP、Morlet频带和DWT单trial特征；
@@ -206,5 +216,5 @@ Phase 6只生成未经全数据PCA的原始特征表。PCA、标准化、方差�
 
 ## 7. 下一步应该先做什么
 
-Phase 6的第一项实施任务应是编写`06_audit_tfr_epochs.py`。只有确认长epoch的可用率、相邻刺激间隔和内存规模后，才能冻结2 Hz下限、baseline和epoch长度。现在不应直接运行Morlet或DWT全体分析。
+06全体审计及07三人pilot已完成。下一步应复核59个保护支持候选，确认长窗QC规则后再放行全体重建。不能因为波形复现与数值检查通过就跳过伪迹复核。主分析下限仍为6 Hz，2--5 Hz仍为探索性。
 

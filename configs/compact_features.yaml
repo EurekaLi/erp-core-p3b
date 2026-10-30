@@ -1,0 +1,24 @@
+channels: [CPz, Pz, PO3, PO4]
+erp_windows:
+  - {name: w200_300, start_s: 0.2, end_s: 0.3}
+  - {name: w300_600, start_s: 0.3, end_s: 0.6}
+  - {name: w600_800, start_s: 0.6, end_s: 0.8}
+power:
+  window_s: [0.0, 0.8]
+  welch: {window: hann, nperseg: 128, noverlap: 64, nfft: 128, detrend: constant}
+  bands:
+    - {name: theta, left_hz: 4.0, right_hz: 8.0, include_right: false}
+    - {name: alpha, left_hz: 8.0, right_hz: 13.0, include_right: false}
+    - {name: beta, left_hz: 13.0, right_hz: 30.0, include_right: true}
+  # 单位µV²，仅避免log(0)，不据此剔除trial。
+  log_floor_uv2: 0.000000000001
+wavelet:
+  family: db4
+  level: 5
+  mode: symmetric
+  detail_levels: [5, 4, 3]
+  entropy_normalized: true
+pilot_subjects: [sub-001, sub-006, sub-025]
+outputs:
+  pilot_directory: data/processed/features/compact_v1_pilot
+  full_directory: data/processed/features/compact_v1

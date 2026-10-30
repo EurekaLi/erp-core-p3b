@@ -1,23 +1,19 @@
-split:
-  strategy: group_k_fold
-  group_key: subject_id
-  n_splits: 5
+# 基础闭环只做LR；LDA/SVM、PCA和置换检验另作扩展，不阻塞深度学习。
+experiments:
+  erp: [erp]
+  erp_power: [erp, power]
+  erp_power_wavelet: [erp, power, wavelet]
+model:
+  C: 1.0
+  class_weight: balanced
+  solver: lbfgs
+  max_iter: 2000
   random_state: 42
-
-metrics:
-  - balanced_accuracy
-  - roc_auc
-  - average_precision
-  - f1
-
-models:
-  - logistic_regression
-  - linear_discriminant_analysis
-  - support_vector_machine
-
+  prediction_threshold: 0.5
 statistics:
-  alpha: 0.05
+  confidence_level: 0.95
   bootstrap_iterations: 2000
-  permutation_iterations: 2000
-  multiple_comparison: cluster_permutation
+  random_state: 42
+outputs:
+  directory: results/traditional_lr
 

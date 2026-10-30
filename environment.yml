@@ -19,6 +19,8 @@ dependencies:
   - ipykernel
   - pyyaml
   - joblib
+  - psutil
+  - threadpoolctl
   - tqdm
   - pytest
   - pytest-cov

@@ -19,11 +19,16 @@ data/processed/*
 *.h5
 *.hdf5
 *.zarr/
+*.pth
+*.pt
+*.ckpt
+*.safetensors
 *.zip
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .pytest-*-tmp/
+.pytest-tmp-*/
 .ruff_cache/
 .mypy_cache/
 .ipynb_checkpoints/
@@ -32,10 +37,18 @@ __pycache__/
 
 # 本地环境和编辑器配置。
 .env
+.env.*
 .venv/
 .conda/
 .idea/
 .vscode/
+
+# 个人面试备考材料保留本地，不作为研究项目发布。
+/docs/17_interview_questions_signals_audio_video.md
+
+# 作者仓库是独立Git checkout；只跟踪资源版本记录，不把它误加入嵌套仓库。
+third_party/CBraMod/
+models/pretrained/CBraMod/
 
 # 运行结果默认可重新生成；最终入选的图表可单独强制加入 Git。
 results/*
@@ -51,4 +64,11 @@ reports/figures/*
 !reports/figures/.gitkeep
 !reports/figures/erp_analysis/
 !reports/figures/erp_analysis/*.png
+
+# 只开放精选分类图；完整预测、权重和缓存仍按上面的规则忽略。
+!reports/figures/final_report/
+reports/figures/final_report/*
+!reports/figures/final_report/model_comparison.png
+!reports/figures/final_report/paired_ba_differences.png
+!reports/figures/final_report/confusion_matrices.png
 

@@ -1,0 +1,54 @@
+dataset:
+  raw_root: data/raw/erp-core-p3
+  epochs_root: data/processed/epochs/adjudicated
+  preprocessing_summary: results/preprocessing/adjudicated/subject_preprocessing.csv
+  expected_subject_count: 39
+  expected_trial_count: 7207
+  excluded_subjects: [sub-030]
+
+sampling:
+  target_sfreq_hz: 256.0
+  display_window_s: [-0.2, 0.8]
+  measurement_window_s: [0.3, 0.6]
+
+morlet:
+  fmax_hz: 30.0
+  frequency_step_hz: 1.0
+  cycle_divisor_hz: 2.0
+  min_cycles: 3.0
+  max_cycles: 10.0
+  zero_mean: true
+
+# 候选方案用于审计几何支持和资源成本；不是已有TFR结果。
+candidates:
+  erp_short_2hz:
+    epoch_window_s: [-0.2, 0.8]
+    baseline_window_s: [-0.2, 0.0]
+    fmin_hz: 2.0
+  initial_long_2hz:
+    epoch_window_s: [-1.5, 2.0]
+    baseline_window_s: [-0.8, -0.2]
+    fmin_hz: 2.0
+  padded_long_2hz:
+    epoch_window_s: [-2.1, 2.1]
+    baseline_window_s: [-0.8, -0.2]
+    fmin_hz: 2.0
+  padded_long_6hz:
+    epoch_window_s: [-2.1, 2.1]
+    baseline_window_s: [-0.6, -0.4]
+    fmin_hz: 6.0
+  compact_6hz:
+    epoch_window_s: [-1.1, 1.3]
+    baseline_window_s: [-0.6, -0.4]
+    fmin_hz: 6.0
+
+memory:
+  batch_trials: 8
+  planning_budget_gib: 2.0
+  # 三份原始float64数组用于预估读取、分支复制和滤波工作区；不是实测峰值。
+  raw_float64_copies: 3
+  break_gap_s: 5.0
+
+outputs:
+  results_root: results/tfr_audit
+  figures_root: reports/figures/tfr_audit

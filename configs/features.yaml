@@ -12,15 +12,44 @@ erp:
 
 time_frequency:
   method: morlet
-  fmin_hz: 2.0
+  parameters_frozen: true
+  decision_record: docs/09_tfr_epoch_audit.md
+  audit_config: configs/tfr_audit.yaml
+  audit_summary: results/tfr_audit/audit_summary.json
+  # 6 Hz 下限保护固定基线的完整核支持；2--5 Hz 不进入基线归一化主分析。
+  fmin_hz: 6.0
   fmax_hz: 30.0
   frequency_step_hz: 1.0
-  baseline_mode: logratio
+  target_sfreq_hz: 256.0
+  # 保留额外的真实信号供低频探索；正式展示不是整个长epoch。
+  epoch_window_s: [-2.1, 2.1]
+  voltage_baseline_s: null
+  display_window_s: [-0.2, 0.8]
+  measurement_window_s: [0.3, 0.6]
+  baseline_s: [-0.6, -0.4]
+  baseline_mode: db
+  # db 定义为 10*log10(power / baseline_mean)，不能直接等同于MNE的logratio。
+  morlet:
+    cycle_divisor_hz: 2.0
+    min_cycles: 3.0
+    max_cycles: 10.0
+    zero_mean: true
+  batch_trials: 8
+  n_jobs: 1
+  planning_budget_gib: 2.0
+  band_boundary_rule: left_closed_right_open_except_last
   bands:
-    delta: [2.0, 4.0]
-    theta: [4.0, 8.0]
+    theta_high: [6.0, 8.0]
     alpha: [8.0, 13.0]
     beta: [13.0, 30.0]
+  exploratory_low_frequency:
+    fmin_hz: 2.0
+    fmax_hz: 5.0
+    baseline_s: null
+    baseline_mode: none
+    include_in_primary_ml_features: false
+    # 小波完整不等于事件特异；该分支不支持精准起始时刻或纯当前刺激的解释。
+    role: exploratory_unbaselined_power_only
 
 wavelet:
   family: db4

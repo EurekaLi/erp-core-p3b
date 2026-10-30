@@ -1,0 +1,14 @@
+# 仅复用该文件的dataset节；CBraMod重采样/权重参数不参与传统特征。
+header_config: configs/cbramod_audit.yaml
+evidence:
+  preprocessing_summary: results/preprocessing/adjudicated/subject_preprocessing.csv
+  erp_measurements: results/erp_analysis/subject_measurements.csv
+split:
+  outer_strategy: stratified_group_k_fold
+  n_splits: 5
+  shuffle: true
+  random_state: 42
+  validation_subject_fraction: 0.2
+  validation_strategy: group_shuffle_split
+outputs:
+  directory: data/processed/classification/v1

@@ -1,0 +1,5 @@
+audit_config: configs/cbramod_audit.yaml
+audit_directory: results/cbramod_audit/pilot-gpu
+outputs:
+  pilot_directory: data/processed/deep_learning/pilot_v1
+  full_directory: data/processed/deep_learning/v1
